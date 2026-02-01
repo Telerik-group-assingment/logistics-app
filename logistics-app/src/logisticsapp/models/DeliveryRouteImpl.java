@@ -1,22 +1,22 @@
 package logisticsapp.models;
 
+import logisticsapp.models.contracts.DeliveryPackage;
 import logisticsapp.models.contracts.DeliveryRoute;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeliveryRouteImpl implements DeliveryRoute {
 
     private int id;
+    private List<DeliveryPackage> deliveryPackages;
     //locations to be implemented
 
     public DeliveryRouteImpl(int id) {
         setId(id);
+        deliveryPackages = new ArrayList<>();
     }
 
-
-    //to be implemented - searchRoute(Location starLocation, Location endLocation)
-    @Override
-    public DeliveryRoute searchRoute() {
-        return null;
-    }
 
     private void setId(int id) {
         this.id = id;
@@ -25,6 +25,17 @@ public class DeliveryRouteImpl implements DeliveryRoute {
     @Override
     public int getID() {
         return id;
+    }
+
+    //to be implemented - searchRoute(Location starLocation, Location endLocation)
+    @Override
+    public DeliveryRoute searchRoute() {
+        return null;
+    }
+
+
+    public void assignPackage(DeliveryPackage deliveryPackage) {
+        deliveryPackages.add(deliveryPackage);
     }
 
     @Override
