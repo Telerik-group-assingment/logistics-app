@@ -1,4 +1,4 @@
 package logisticsapp.commands;
 
-public class CreateRouteCommand {
+public class CommandsConstants {
 }
