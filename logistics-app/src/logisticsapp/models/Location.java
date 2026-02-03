@@ -13,4 +13,9 @@ public class Location {
     }
 
 
+    public LocalTime getDepartureTime() {
+        return departureTime;
+    }
+
+    //setter - expectedArrivalTime
 }

@@ -7,14 +7,17 @@ import logisticsapp.utils.ValidationHelpers;
 public class DeliveryPackageImpl implements DeliveryPackage {
 
     private static final String WEIGHT_ERROR_MESSAGE = "Weight cannot be negative!";
+    private static final String LOCATION_ERROR_MESSAGE = "End location cannot be the same as start location!.";
 
     private int id;
     private double weight;
-    // Locations to be implemented
+    private Location startLocation;
+    private Location endLocation;
     private String contactInformation;
     private State state;
 
-    public DeliveryPackageImpl(int id, double weight, String contactInformation, State state) {
+    public DeliveryPackageImpl(int id, double weight, Location startLocation, Location endLocation,
+                               String contactInformation, State state) {
         setId(id);
         setWeight(weight);
     }
@@ -30,6 +33,23 @@ public class DeliveryPackageImpl implements DeliveryPackage {
     private void setWeight(double weight) {
         ValidationHelpers.validateNumberNotNegative(weight, WEIGHT_ERROR_MESSAGE);
         this.weight = weight;
+    }
+
+    public Location getStartLocation() {
+        return startLocation;
+    }
+
+    private void setStartLocation(Location startLocation) {
+        this.startLocation = startLocation;
+    }
+
+    public Location getEndLocation() {
+        return endLocation;
+    }
+
+    private void setEndLocation(Location endLocation) {
+        ValidationHelpers.ValidateLocation(getStartLocation(), endLocation, LOCATION_ERROR_MESSAGE);
+        this.endLocation = endLocation;
     }
 
     public String getContactInformation() {

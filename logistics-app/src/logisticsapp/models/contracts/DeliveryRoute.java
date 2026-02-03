@@ -1,6 +1,14 @@
 package logisticsapp.models.contracts;
 
+
+import logisticsapp.models.DeliveryPackageImpl;
+
+import java.time.LocalTime;
+
 public interface DeliveryRoute extends Printable, Identifiable {
 
-    DeliveryRoute searchRoute();
+    LocalTime getDepartureTime();
+
+    void addPackage(DeliveryPackageImpl deliveryPackage);
+
 }

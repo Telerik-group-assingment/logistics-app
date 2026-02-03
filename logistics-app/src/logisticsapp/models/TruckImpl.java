@@ -9,6 +9,7 @@ public class TruckImpl implements Truck {
     private int capacity;
     private int maxRange;
     private TruckBrand truckBrand;
+    // private DeliveryRoute
 
     public TruckImpl(int id, int capacity, int maxRange, TruckBrand truckBrand) {
         setId(id);
