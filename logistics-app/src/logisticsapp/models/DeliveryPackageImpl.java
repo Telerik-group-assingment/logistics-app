@@ -10,13 +10,14 @@ public class DeliveryPackageImpl implements DeliveryPackage {
 
     private int id;
     private double weight;
+//    private Customer customer;
     // Locations to be implemented
-    private String contactInformation;
     private State state;
 
-    public DeliveryPackageImpl(int id, double weight, String contactInformation, State state) {
+    public DeliveryPackageImpl(int id, double weight,State state) {
         setId(id);
         setWeight(weight);
+        this.state = state;
     }
 
     private void setId(int id) {
@@ -32,16 +33,10 @@ public class DeliveryPackageImpl implements DeliveryPackage {
         this.weight = weight;
     }
 
-    public String getContactInformation() {
-        return contactInformation;
-    }
 
-    private void setContactInformation(String contactInformation) {
-        this.contactInformation = contactInformation;
-    }
 
     public State getState() {
-        return state;
+        return this.state;
     }
 
     private void setState(State state) {
@@ -58,6 +53,6 @@ public class DeliveryPackageImpl implements DeliveryPackage {
         return String.format("Delivery package%n" +
                             "Weight: %.2f%n",
                             "State: %s",
-                            "Contact information: %s", getWeight(), getState(), getContactInformation());
+                            "Contact information: %s", getWeight(), getState(), getClass());
     }
 }

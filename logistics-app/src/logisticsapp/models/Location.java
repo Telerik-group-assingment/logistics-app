@@ -1,13 +1,15 @@
 package logisticsapp.models;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Location {
 
-    private LocalTime departureTime;
-    private LocalTime expectedArrivalTIme;
+    private LocalDateTime departureTime;
+    private LocalDateTime expectedArrivalTIme;
 
-    public Location(LocalTime departureTime, LocalTime expectedArrivalTIme) {
+
+    public Location(LocalDateTime departureTime, LocalDateTime expectedArrivalTIme) {
         this.departureTime = departureTime;
         this.expectedArrivalTIme = expectedArrivalTIme;
     }

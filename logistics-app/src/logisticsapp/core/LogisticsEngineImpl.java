@@ -31,15 +31,25 @@ public class LogisticsEngineImpl implements Engine {
 
         while (true) {
 
-            String inputLine = scanner.nextLine();
-            if (inputLine.isBlank()) {
-                System.out.println(EMPTY_COMMAND_ERROR);
-                continue;
+
+            try {
+                String inputLine = scanner.nextLine();
+                if (inputLine.isBlank()) {
+                    System.out.println(EMPTY_COMMAND_ERROR);
+                    continue;
+                }
+                if (inputLine.equalsIgnoreCase(TERMINATION_COMMAND)) {
+                    break;
+                }
+                processCommand(inputLine);
+
+            } catch (Exception ex) {
+                if(ex.getMessage() != null && !ex.getMessage().isEmpty()){
+                    System.out.println(ex.getMessage());
+                }else{
+                    System.out.println(ex.toString());
+                }
             }
-            if (inputLine.equalsIgnoreCase(TERMINATION_COMMAND)) {
-                break;
-            }
-            processCommand(inputLine);
 
         }
 
