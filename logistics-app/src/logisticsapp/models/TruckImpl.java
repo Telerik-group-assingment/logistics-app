@@ -1,14 +1,20 @@
 package logisticsapp.models;
 
+import logisticsapp.models.contracts.DeliveryPackage;
 import logisticsapp.models.contracts.Truck;
 import logisticsapp.models.enums.TruckBrand;
+import logisticsapp.utils.ValidationHelpers;
+
+import java.util.List;
 
 public class TruckImpl implements Truck {
 
+    public static final String ERROR_CAPACITY_CANNOT_BE_NEGATIVE = "No capacity in truck!";
     private int id;
-    private int capacity;
+    private double capacity;
     private int maxRange;
     private TruckBrand truckBrand;
+    private List<DeliveryPackageImpl> deliveryPackages;
 
     public TruckImpl(int id, int capacity, int maxRange, TruckBrand truckBrand) {
         setId(id);
@@ -21,7 +27,7 @@ public class TruckImpl implements Truck {
         this.id = id;
     }
 
-    public int getCapacity() {
+    public double getCapacity() {
         return capacity;
     }
 
@@ -43,6 +49,12 @@ public class TruckImpl implements Truck {
 
     private void setTruckBrand(TruckBrand truckBrand) {
         this.truckBrand = truckBrand;
+    }
+
+    private void assignPackageToTruck(DeliveryPackageImpl deliveryPackage) {
+        ValidationHelpers.validateNumberNotNegative(capacity - deliveryPackage.getWeight(), ERROR_CAPACITY_CANNOT_BE_NEGATIVE);
+        deliveryPackages.add(deliveryPackage);
+        capacity = capacity - deliveryPackage.getWeight();
     }
 
     @Override
