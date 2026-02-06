@@ -17,14 +17,16 @@ public interface LogisticsRepository {
 
     List<TruckImpl> getTrucks();
 
+    List<Location> getLocations();
+
 
     Customer createCustomer(String firstName,String secondName,String PhoneNum);
 
-    DeliveryRouteImpl createDeliveryRoute();
+    DeliveryRouteImpl createDeliveryRoute(List<Location> locations);
 
     DeliveryPackageImpl createDeliveryPackage(double weight, State state);
 
-    Location createLocation(LocalDateTime departureTime,LocalDateTime expectedArrivalTime);
+    Location createLocation(String city);
 
     TruckImpl createTruck(TruckBrand truckBrand);
 
