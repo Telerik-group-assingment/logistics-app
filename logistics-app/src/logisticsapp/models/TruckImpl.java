@@ -5,6 +5,7 @@ import logisticsapp.models.contracts.Truck;
 import logisticsapp.models.enums.TruckBrand;
 import logisticsapp.utils.ValidationHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TruckImpl implements Truck {
@@ -21,6 +22,7 @@ public class TruckImpl implements Truck {
         setCapacity(capacity);
         setMaxRange(maxRange);
         setTruckBrand(truckBrand);
+        deliveryPackages = new ArrayList<>();
     }
 
     private void setId(int id) {
@@ -51,7 +53,7 @@ public class TruckImpl implements Truck {
         this.truckBrand = truckBrand;
     }
 
-    private void assignPackageToTruck(DeliveryPackageImpl deliveryPackage) {
+    public void assignPackageToTruck(DeliveryPackageImpl deliveryPackage) {
         ValidationHelpers.validateNumberNotNegative(capacity - deliveryPackage.getWeight(), ERROR_CAPACITY_CANNOT_BE_NEGATIVE);
         deliveryPackages.add(deliveryPackage);
         capacity = capacity - deliveryPackage.getWeight();
