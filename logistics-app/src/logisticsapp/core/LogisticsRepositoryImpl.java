@@ -1,6 +1,7 @@
 package logisticsapp.core;
 
 import logisticsapp.core.contracts.LogisticsRepository;
+import logisticsapp.exceptions.InvalidInput;
 import logisticsapp.models.*;
 import logisticsapp.models.enums.State;
 import logisticsapp.models.enums.TruckBrand;
@@ -9,8 +10,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class LogisticsRepositoryImpl implements LogisticsRepository {
-
-    private int nextId;
 
     private int nextTruckId;
     private int nextCustomerId;
@@ -22,10 +21,10 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
     private final List<TruckImpl> trucks = new ArrayList<>();
     private final List<DeliveryRouteImpl> deliveryRoutes = new ArrayList<>();
     private final Map<String,Map<String,Integer>> distanceMap = new HashMap<>();
+    private final List<Location> locations = new ArrayList<>();
 
 
     public LogisticsRepositoryImpl(){
-        nextId = 0;
         nextTruckId = 0;
         nextCustomerId = 0;
         nextDeliveryRouteId = 0;
@@ -51,17 +50,23 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
     @Override
     public Customer createCustomer(String firstName, String secondName, String phoneNum) {
 
+        if(this.customers.stream().anyMatch(c -> c.getPhoneNum().equals(phoneNum))){
+            throw new InvalidInput("Customer with that phoneNumber already exists! ");
+        }
+
         Customer customer = new Customer(++nextCustomerId,firstName,secondName,phoneNum);
         this.customers.add(customer);
         return customer;
     }
 
     @Override
-    public DeliveryRouteImpl createDeliveryRoute() {
+    public DeliveryRouteImpl createDeliveryRoute(List<Location> locations) {
 
+       DeliveryRouteImpl deliveryRoute = new DeliveryRouteImpl(++nextDeliveryRouteId,locations);
 
+       this.deliveryRoutes.add(deliveryRoute);
 
-        return null;
+        return deliveryRoute;
     }
 
     @Override
@@ -75,8 +80,16 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
     }
 
     @Override
-    public Location createLocation(LocalDateTime departureTime, LocalDateTime expectedArrivalTime) {
-        return null;
+    public Location createLocation(String city) {
+        Location location = new Location(city);
+
+        locations.add(location);
+
+        return location;
+    }
+
+    public List<Location> getLocations() {
+        return locations;
     }
 
     @Override
