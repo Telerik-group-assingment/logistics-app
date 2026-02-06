@@ -1,10 +1,7 @@
 package logisticsapp.core;
 
 import logisticsapp.commands.contracts.Command;
-import logisticsapp.commands.creation.CreateCustomerCommand;
-import logisticsapp.commands.creation.CreateDeliveryPackageCommand;
-import logisticsapp.commands.creation.CreateDeliveryRoute;
-import logisticsapp.commands.creation.CreateTruckCommand;
+import logisticsapp.commands.creation.*;
 import logisticsapp.commands.enums.CommandType;
 import logisticsapp.core.contracts.CommandFactory;
 import logisticsapp.core.contracts.LogisticsRepository;
@@ -38,7 +35,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case CREATETRUCK:
                 return new CreateTruckCommand(logisticsRepository);
             case CREATELOCATION:
-                return new CreateCustomerCommand(logisticsRepository);
+                return new CreateLocationCommand(logisticsRepository);
             default:
                 throw new IllegalArgumentException(INVALID_COMMAND);
 
