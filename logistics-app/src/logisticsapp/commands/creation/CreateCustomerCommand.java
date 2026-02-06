@@ -21,8 +21,6 @@ public class CreateCustomerCommand implements Command {
         this.repository = repository;
     }
 
-
-
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
