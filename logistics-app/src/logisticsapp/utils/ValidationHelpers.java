@@ -12,7 +12,7 @@ public class ValidationHelpers {
         }
     }
 
-    public static void validateArgumentsCount(List<String> parameters,int expectedArgumentsCount){
+    public static <E> void validateArgumentsCount(List<E> parameters,int expectedArgumentsCount){
         if(parameters.size() != expectedArgumentsCount){
             throw new IllegalArgumentException(String.format(INVALID_NUMBER_OF_ARGUMENTS,expectedArgumentsCount,parameters.size()));
         }
