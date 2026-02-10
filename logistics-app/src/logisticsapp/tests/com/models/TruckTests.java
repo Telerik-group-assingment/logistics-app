@@ -10,28 +10,28 @@ import org.junit.jupiter.api.Test;
 public class TruckTests {
 
     @Test
-    public void Constructor_ShouldSetCapacityValueCorrectly() {
+    public void constructor_shouldSetCapacityValueCorrectly() {
         TruckImpl truck = new TruckImpl(1, 20, 500, TruckBrand.SCANIA);
 
         Assertions.assertEquals(20, truck.getCapacity());
     }
 
     @Test
-    public void Constructor_ShouldSetMaxRangeValueCorrectly() {
+    public void constructor_shouldSetMaxRangeValueCorrectly() {
         TruckImpl truck = new TruckImpl(1, 20, 500, TruckBrand.SCANIA);
 
         Assertions.assertEquals(500, truck.getMaxRange());
     }
 
     @Test
-    public void Constructor_ShouldSetTruckBrandValueCorrectly() {
+    public void constructor_shouldSetTruckBrandValueCorrectly() {
         TruckImpl truck = new TruckImpl(1, 20, 500, TruckBrand.SCANIA);
 
         Assertions.assertEquals(TruckBrand.SCANIA, truck.getTruckBrand());
     }
 
     @Test
-    public void AssignPackeToTruck_ShouldWorkCorrectly() {
+    public void assignPackeToTruck_shouldWorkCorrectly() {
         TruckImpl truck = new TruckImpl(1, 200, 500, TruckBrand.SCANIA);
         DeliveryPackageImpl deliveryPackage = new DeliveryPackageImpl(1,30, State.NOT_ASSIGNED);
 
