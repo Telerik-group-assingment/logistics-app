@@ -1,12 +1,15 @@
 package logisticsapp.models;
 
 import logisticsapp.exceptions.InvalidInput;
+import logisticsapp.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Customer {
+
+    private static final String INVALID_NAME_ERROR_MESSAGE = "%s name must be between %d and %d characters.";
 
     private final static int MIN_NAMELENGTH = 2;
     private final static int MAX_NAMELENGTH = 30;
@@ -52,18 +55,12 @@ public class Customer {
     }
 
     public void setFirstName(String firstName) {
-        if (firstName.length() < MIN_NAMELENGTH || firstName.length() > MAX_NAMELENGTH) {
-            throw new InvalidInput(String.format("Name must be between %d and %d characters",
-                    MIN_NAMELENGTH, MAX_NAMELENGTH));
-        }
+        ValidationHelpers.validateStringLength(firstName, MIN_NAMELENGTH, MAX_NAMELENGTH, String.format(INVALID_NAME_ERROR_MESSAGE, "First", MIN_NAMELENGTH, MAX_NAMELENGTH));
         this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
-        if (lastName.length() < MIN_NAMELENGTH || lastName.length() > MAX_NAMELENGTH) {
-            throw new InvalidInput(String.format("Name must be between %d and %d characters",
-                    MIN_NAMELENGTH, MAX_NAMELENGTH));
-        }
+        ValidationHelpers.validateStringLength(lastName, MIN_NAMELENGTH, MAX_NAMELENGTH, String.format(INVALID_NAME_ERROR_MESSAGE, "Last", MIN_NAMELENGTH, MAX_NAMELENGTH));
         this.lastName = lastName;
     }
 
