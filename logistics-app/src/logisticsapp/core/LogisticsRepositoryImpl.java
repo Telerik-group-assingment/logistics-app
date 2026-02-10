@@ -79,6 +79,10 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
         return deliveryPackage;
     }
 
+    public List<DeliveryRouteImpl> getDeliveryRoutes() {
+        return deliveryRoutes;
+    }
+
     @Override
     public Location createLocation(String city) {
         Location location = new Location(city);

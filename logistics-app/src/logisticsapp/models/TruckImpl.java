@@ -59,6 +59,10 @@ public class TruckImpl implements Truck {
         capacity = capacity - deliveryPackage.getWeight();
     }
 
+    public List<DeliveryPackageImpl> getDeliveryPackages() {
+        return new ArrayList<>(deliveryPackages);
+    }
+
     @Override
     public int getID() {
         return id;
