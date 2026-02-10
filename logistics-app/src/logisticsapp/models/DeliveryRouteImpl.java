@@ -62,6 +62,10 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         return null;
     }
 
+    public List<Location> getLocations() {
+        return locations;
+    }
+
     @Override
     public String print() {
         return String.format("Delivery route%n" +
