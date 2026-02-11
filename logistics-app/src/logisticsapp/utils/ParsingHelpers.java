@@ -17,11 +17,11 @@ public class ParsingHelpers {
         }
     }
 
-    public static int tryParseInteger(String valueToParse, String parameterName) {
+    public static int tryParseInteger(String valueToParse) {
         try {
             return Integer.parseInt(valueToParse);
         } catch (NumberFormatException e) {
-            throw new InvalidInput(String.format(INVALID_NUMBER_FIELD_MESSAGE, parameterName));
+            throw new InvalidInput(INVALID_NUMBER_FIELD_MESSAGE);
         }
     }
 
@@ -43,10 +43,5 @@ public class ParsingHelpers {
             throw new IllegalArgumentException(String.format(errorMessage, valueToParse));
         }
     }
-
-
-
-
-
 
 }
