@@ -31,7 +31,14 @@ public interface LogisticsRepository {
     TruckImpl createTruck(TruckBrand truckBrand);
 
 
-    }
+    TruckImpl getTruckById(int truckId);
+
+    DeliveryRouteImpl getRouteById(int routeId);
+
+    DeliveryPackageImpl getPackageById(int packageId);
+
+    List<DeliveryRouteImpl> searchRoutes(Location startLocation, Location endLocation);
+}
 
 
 
