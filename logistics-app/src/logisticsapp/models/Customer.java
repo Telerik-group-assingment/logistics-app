@@ -50,21 +50,21 @@ public class Customer {
         return phoneNum;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
-    public void setFirstName(String firstName) {
+    private void setFirstName(String firstName) {
         ValidationHelpers.validateStringLength(firstName, MIN_NAMELENGTH, MAX_NAMELENGTH, String.format(INVALID_NAME_ERROR_MESSAGE, "First", MIN_NAMELENGTH, MAX_NAMELENGTH));
         this.firstName = firstName;
     }
 
-    public void setLastName(String lastName) {
+    private void setLastName(String lastName) {
         ValidationHelpers.validateStringLength(lastName, MIN_NAMELENGTH, MAX_NAMELENGTH, String.format(INVALID_NAME_ERROR_MESSAGE, "Last", MIN_NAMELENGTH, MAX_NAMELENGTH));
         this.lastName = lastName;
     }
 
-    public void setPhoneNum(String phoneNum) {
+    private void setPhoneNum(String phoneNum) {
         if (phoneNum.length() != 10) {
             throw new InvalidInput("Invalid phone number");
         }
