@@ -1,7 +1,9 @@
 package logisticsapp.models;
 
+import logisticsapp.exceptions.IllegalOperation;
 import logisticsapp.exceptions.InvalidInput;
 import logisticsapp.models.contracts.DeliveryRoute;
+import logisticsapp.models.contracts.Truck;
 import logisticsapp.utils.ValidationHelpers;
 
 import java.time.LocalDateTime;
@@ -14,7 +16,10 @@ public class DeliveryRouteImpl implements DeliveryRoute {
 
     private int id;
     private List<Location> locations;
+    private Location startLocation;
+    private Location endLocation;
     private LocalDateTime departureTime;
+    private TruckImpl truck;
 
     //locations to be implemented
 
@@ -22,6 +27,8 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         setId(id);
         this.locations = new ArrayList<>();
         setLocations(locations);
+        this.startLocation = locations.get(0);
+        this.endLocation = locations.get(locations.size() - 1);
     }
 
     public void startRoute() {
@@ -50,26 +57,47 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         locations.addAll(deliveryLocations);
     }
 
+    public void assignTruck(TruckImpl truck) {
+        if (this.truck != null) {
+            throw new IllegalOperation("Route already has a truck");
+        }
+        this.truck = truck;
+        truck.markAsAssigned(this);
+    }
+
 
     @Override
     public int getID() {
         return id;
     }
 
-    //to be implemented - searchRoute(Location starLocation, Location endLocation)
-    @Override
-    public DeliveryRoute searchRoute() {
-        return null;
-    }
-
     public List<Location> getLocations() {
         return locations;
     }
 
+    public Location getStartLocation() {
+        return startLocation;
+    }
+
+    public Location getEndLocation() {
+        return endLocation;
+    }
+
     @Override
     public String print() {
-        return String.format("Delivery route%n" +
-                        "Start location: %s%n",
-                "End location: %s"); // TO BE IMPLEMENTED
+        StringBuilder sb = new StringBuilder();
+        sb.append("Route ").append(id).append(" | Truck: ")
+                .append(truck != null ? truck.getID() : "none")
+                .append("\nPackages: ");
+
+        if (truck != null && !truck.getDeliveryPackages().isEmpty()) {
+            for (DeliveryPackageImpl p : truck.getDeliveryPackages()) {
+                sb.append(p.getID()).append(" ");
+            }
+        } else {
+            sb.append("none");
+        }
+
+        return sb.toString().trim();
     }
 }
