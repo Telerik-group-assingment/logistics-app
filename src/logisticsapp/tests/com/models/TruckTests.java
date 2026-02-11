@@ -1,4 +1,4 @@
-package com.models;
+package logisticsapp.tests.com.models;
 
 import logisticsapp.models.DeliveryPackageImpl;
 import logisticsapp.models.TruckImpl;
