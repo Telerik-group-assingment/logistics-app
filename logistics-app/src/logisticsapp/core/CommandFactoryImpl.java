@@ -1,15 +1,14 @@
 package logisticsapp.core;
 
+import logisticsapp.commands.assign.AssignPackageCommand;
+import logisticsapp.commands.assign.AssignTruckCommand;
 import logisticsapp.commands.contracts.Command;
 import logisticsapp.commands.creation.*;
 import logisticsapp.commands.enums.CommandType;
+import logisticsapp.commands.search.SearchRouteCommand;
 import logisticsapp.core.contracts.CommandFactory;
 import logisticsapp.core.contracts.LogisticsRepository;
 import logisticsapp.utils.ParsingHelpers;
-
-import java.util.List;
-
-import static logisticsapp.commands.enums.CommandType.*;
 
 public class CommandFactoryImpl implements CommandFactory {
 
@@ -20,7 +19,8 @@ public class CommandFactoryImpl implements CommandFactory {
     @Override
     public Command createCommandFromCommandName(String commandTypeAsString, LogisticsRepository logisticsRepository) {
 
-        CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class,String.format(INVALID_COMMAND,commandTypeAsString));
+        CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString,
+                CommandType.class,String.format(INVALID_COMMAND,commandTypeAsString));
 
 
         switch (commandType) {
@@ -36,6 +36,12 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new CreateTruckCommand(logisticsRepository);
             case CREATELOCATION:
                 return new CreateLocationCommand(logisticsRepository);
+            case ASSIGNPACKAGE:
+                return new AssignPackageCommand(logisticsRepository);
+            case ASSIGNTRUCK:
+                return new AssignTruckCommand(logisticsRepository);
+            case SEARCHROUTE:
+                return new SearchRouteCommand(logisticsRepository);
             default:
                 throw new IllegalArgumentException(INVALID_COMMAND);
 
