@@ -14,25 +14,24 @@ import java.util.List;
 public class DeliveryRouteTests {
 
     DeliveryRouteImpl deliveryRoute;
-    Location location1 = new Location("SYD");
-    Location location2 = new Location("MEL");
-    private List<Location> locations = new ArrayList<>();
+
+
 
     @BeforeEach
     public void init() {
-        deliveryRoute = new DeliveryRouteImpl(1,locations);
-    }
+        List<Location> locations = new ArrayList<>();
+        Location location1 = new Location("SYD");
+        Location location2 = new Location("MEL");
 
-    // public DeliveryRouteImpl(int id, List<Location> locations) {
-    //        setId(id);
-    //        this.locations = new ArrayList<>();
-    //        setLocations(locations);
-    //    }
+        locations.add(location1);
+        locations.add(location2);
+
+        deliveryRoute = new DeliveryRouteImpl(1,locations);
+
+    }
 
     @Test
     public void deliveryRouteConstructor_ShouldSetLocationsCorrectly(){
-        locations.add(location1);
-        locations.add(location2);
         Assertions.assertEquals(2,deliveryRoute.getLocations().size());
     }
 
