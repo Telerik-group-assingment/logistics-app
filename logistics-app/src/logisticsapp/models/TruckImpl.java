@@ -1,5 +1,6 @@
 package logisticsapp.models;
 
+import logisticsapp.exceptions.IllegalOperation;
 import logisticsapp.models.contracts.DeliveryPackage;
 import logisticsapp.models.contracts.Truck;
 import logisticsapp.models.enums.TruckBrand;
@@ -16,6 +17,8 @@ public class TruckImpl implements Truck {
     private int maxRange;
     private TruckBrand truckBrand;
     private List<DeliveryPackageImpl> deliveryPackages;
+    private boolean assigned;
+    private DeliveryRouteImpl route;
 
     public TruckImpl(int id, int capacity, int maxRange, TruckBrand truckBrand) {
         setId(id);
@@ -23,6 +26,7 @@ public class TruckImpl implements Truck {
         setMaxRange(maxRange);
         setTruckBrand(truckBrand);
         deliveryPackages = new ArrayList<>();
+        assigned = false;
     }
 
     private void setId(int id) {
@@ -54,14 +58,30 @@ public class TruckImpl implements Truck {
     }
 
     public void assignPackageToTruck(DeliveryPackageImpl deliveryPackage) {
-        ValidationHelpers.validateNumberNotNegative(capacity - deliveryPackage.getWeight(), ERROR_CAPACITY_CANNOT_BE_NEGATIVE);
+        ValidationHelpers.validateNumberNotNegative(capacity - deliveryPackage.getWeight(),
+                ERROR_CAPACITY_CANNOT_BE_NEGATIVE);
+
+        if (deliveryPackages.contains(deliveryPackage)) {
+            throw new IllegalOperation("Package already loaded in this truck");
+        }
+
         deliveryPackages.add(deliveryPackage);
-        capacity = capacity - deliveryPackage.getWeight();
+        capacity -= deliveryPackage.getWeight();
+    }
+
+    public boolean isAssigned() {
+        return assigned;
+    }
+
+    void markAsAssigned(DeliveryRouteImpl route) {
+        this.assigned = true;
+        this.route = route;
     }
 
     public List<DeliveryPackageImpl> getDeliveryPackages() {
         return new ArrayList<>(deliveryPackages);
     }
+
 
     @Override
     public int getID() {
@@ -71,8 +91,8 @@ public class TruckImpl implements Truck {
     @Override
     public String print() {
         return String.format("Truck info:%n" +
-                            "Capacity: %d",
-                            "Max range: %d",
-                            "Truck brand: %s", getCapacity(), getMaxRange(), getTruckBrand());
+                        "Capacity: %d",
+                "Max range: %d",
+                "Truck brand: %s", getCapacity(), getMaxRange(), getTruckBrand());
     }
 }
