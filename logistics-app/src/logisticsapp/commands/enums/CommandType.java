@@ -6,6 +6,9 @@ public enum CommandType {
     CREATETRUCK,
     CREATEDELIVERYROUTE,
     CREATELOCATION,
+    ASSIGNPACKAGE,
+    ASSIGNTRUCK,
+    SEARCHROUTE,
 
 
 }
