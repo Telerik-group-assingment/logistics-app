@@ -1,6 +1,7 @@
 package logisticsapp.core;
 
 import logisticsapp.core.contracts.LogisticsRepository;
+import logisticsapp.exceptions.IllegalOperation;
 import logisticsapp.exceptions.InvalidInput;
 import logisticsapp.models.*;
 import logisticsapp.models.enums.State;
@@ -20,11 +21,11 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
     private final List<Customer> customers = new ArrayList<>();
     private final List<TruckImpl> trucks = new ArrayList<>();
     private final List<DeliveryRouteImpl> deliveryRoutes = new ArrayList<>();
-    private final Map<String,Map<String,Integer>> distanceMap = new HashMap<>();
     private final List<Location> locations = new ArrayList<>();
+    private final List<DeliveryPackageImpl> packages = new ArrayList<>();
 
 
-    public LogisticsRepositoryImpl(){
+    public LogisticsRepositoryImpl() {
         nextTruckId = 0;
         nextCustomerId = 0;
         nextDeliveryRouteId = 0;
@@ -50,41 +51,90 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
     @Override
     public Customer createCustomer(String firstName, String secondName, String phoneNum) {
 
-        if(this.customers.stream().anyMatch(c -> c.getPhoneNum().equals(phoneNum))){
+        if (this.customers.stream().anyMatch(c -> c.getPhoneNum().equals(phoneNum))) {
             throw new InvalidInput("Customer with that phoneNumber already exists! ");
         }
 
-        Customer customer = new Customer(++nextCustomerId,firstName,secondName,phoneNum);
+        Customer customer = new Customer(++nextCustomerId, firstName, secondName, phoneNum);
         this.customers.add(customer);
         return customer;
     }
 
     @Override
-    public DeliveryRouteImpl createDeliveryRoute(List<Location> locations) {
+    public DeliveryRouteImpl createDeliveryRoute(List<Location> deliveryLocations) {
 
-       DeliveryRouteImpl deliveryRoute = new DeliveryRouteImpl(++nextDeliveryRouteId,locations);
+        boolean exists = deliveryRoutes.stream()
+                .anyMatch(r -> {
+                    List<String> existingCities = r.getLocations().stream()
+                            .map(Location::getCity)
+                            .toList();
 
-       this.deliveryRoutes.add(deliveryRoute);
+                    List<String> newCities = deliveryLocations.stream()
+                            .map(Location::getCity)
+                            .toList();
+
+                    return existingCities.equals(newCities);
+                });
+
+        if (exists) {
+            throw new IllegalOperation("You are trying to create a route that already exists");
+        }
+
+        DeliveryRouteImpl deliveryRoute = new DeliveryRouteImpl(++nextDeliveryRouteId, deliveryLocations);
+        this.deliveryRoutes.add(deliveryRoute);
 
         return deliveryRoute;
+    }
+
+    public DeliveryPackageImpl getPackageById(int id) {
+        return packages.stream()
+                .filter(p -> p.getID() == id)
+                .findFirst()
+                .orElseThrow(() ->
+                        new IllegalArgumentException(
+                                "Package with ID " + id + " not found"));
     }
 
     @Override
     public DeliveryPackageImpl createDeliveryPackage(double weight, State state) {
 
-        DeliveryPackageImpl deliveryPackage = new DeliveryPackageImpl(++nextDeliveryPackageId,weight,state);
+        DeliveryPackageImpl deliveryPackage = new DeliveryPackageImpl(++nextDeliveryPackageId, weight, state);
 
-//        TODO
+        this.packages.add(deliveryPackage);
 
         return deliveryPackage;
     }
 
+
+    public List<DeliveryRouteImpl> searchRoutes(Location startLocation, Location endLocation) {
+
+        return deliveryRoutes.stream()
+                .filter(r -> r.getStartLocation().getCity().equals(startLocation.getCity())
+                        && r.getEndLocation().getCity().equals(endLocation.getCity()))
+                .toList();
+
+//        return deliveryRoutes
+//                .stream()
+//                .filter(r -> r.getLocations().contains(startLocation) &&
+//                        r.getLocations().contains(endLocation)).toList();
+    }
+
+
     public List<DeliveryRouteImpl> getDeliveryRoutes() {
-        return deliveryRoutes;
+        return Collections.unmodifiableList(deliveryRoutes);
     }
 
     @Override
     public Location createLocation(String city) {
+
+        boolean exists = locations
+                .stream()
+                .anyMatch(l -> l.getCity().equals(city));
+
+        if(exists){
+            throw new IllegalOperation("You are trying to create a location that already exists");
+        }
+
         Location location = new Location(city);
 
         locations.add(location);
@@ -93,8 +143,25 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
     }
 
     public List<Location> getLocations() {
-        return locations;
+        return Collections.unmodifiableList(locations);
     }
+
+    public TruckImpl getTruckById(int id) {
+        return trucks.stream()
+                .filter(t -> t.getID() == id)
+                .findFirst()
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Truck with ID " + id + " not found"));
+    }
+
+    public DeliveryRouteImpl getRouteById(int id) {
+        return deliveryRoutes.stream()
+                .filter(r -> r.getID() == id)
+                .findFirst()
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Route with ID " + id + " not found"));
+    }
+
 
     @Override
     public TruckImpl createTruck(TruckBrand truckBrand) {
@@ -102,7 +169,7 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
         int capacity = 0;
         int maxRange = 0;
 
-        switch (truckBrand.toString()){
+        switch (truckBrand.toString()) {
 
             case "Scania":
 
@@ -123,13 +190,10 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
                 break;
         }
 
-        TruckImpl truck = new TruckImpl(++nextTruckId,capacity,maxRange,truckBrand);
+        TruckImpl truck = new TruckImpl(++nextTruckId, capacity, maxRange, truckBrand);
         this.trucks.add(truck);
         return truck;
     }
-
-
-
 
 
 }
