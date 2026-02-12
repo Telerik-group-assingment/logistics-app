@@ -2,7 +2,6 @@ package com.models;
 
 import logisticsapp.models.DeliveryPackageImpl;
 import logisticsapp.models.TruckImpl;
-import logisticsapp.models.enums.State;
 import logisticsapp.models.enums.TruckBrand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,7 @@ public class TruckTests {
     @Test
     public void assignPackeToTruck_shouldWorkCorrectly() {
         TruckImpl truck = new TruckImpl(1, 200, 500, TruckBrand.SCANIA);
-        DeliveryPackageImpl deliveryPackage = new DeliveryPackageImpl(1,30, State.NOT_ASSIGNED);
+        DeliveryPackageImpl deliveryPackage = new DeliveryPackageImpl(1,30);
 
         truck.assignPackageToTruck(deliveryPackage);
 

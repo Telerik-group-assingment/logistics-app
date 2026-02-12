@@ -55,12 +55,14 @@ public class Customer {
     }
 
     private void setFirstName(String firstName) {
-        ValidationHelpers.validateStringLength(firstName, MIN_NAMELENGTH, MAX_NAMELENGTH, String.format(INVALID_NAME_ERROR_MESSAGE, "First", MIN_NAMELENGTH, MAX_NAMELENGTH));
+        ValidationHelpers.validateStringLength(firstName, MIN_NAMELENGTH, MAX_NAMELENGTH,
+                String.format(INVALID_NAME_ERROR_MESSAGE, "First", MIN_NAMELENGTH, MAX_NAMELENGTH));
         this.firstName = firstName;
     }
 
     private void setLastName(String lastName) {
-        ValidationHelpers.validateStringLength(lastName, MIN_NAMELENGTH, MAX_NAMELENGTH, String.format(INVALID_NAME_ERROR_MESSAGE, "Last", MIN_NAMELENGTH, MAX_NAMELENGTH));
+        ValidationHelpers.validateStringLength(lastName, MIN_NAMELENGTH, MAX_NAMELENGTH,
+                String.format(INVALID_NAME_ERROR_MESSAGE, "Last", MIN_NAMELENGTH, MAX_NAMELENGTH));
         this.lastName = lastName;
     }
 

@@ -1,11 +1,8 @@
 package logisticsapp.core.contracts;
 
 import logisticsapp.models.*;
-import logisticsapp.models.contracts.Identifiable;
-import logisticsapp.models.enums.State;
 import logisticsapp.models.enums.TruckBrand;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface LogisticsRepository {
@@ -24,7 +21,7 @@ public interface LogisticsRepository {
 
     DeliveryRouteImpl createDeliveryRoute(List<Location> locations);
 
-    DeliveryPackageImpl createDeliveryPackage(double weight, State state);
+    DeliveryPackageImpl createDeliveryPackage(double weight);
 
     Location createLocation(String city);
 
@@ -38,6 +35,8 @@ public interface LogisticsRepository {
     DeliveryPackageImpl getPackageById(int packageId);
 
     List<DeliveryRouteImpl> searchRoutes(Location startLocation, Location endLocation);
+
+    List<DeliveryRouteImpl> getDeliveryRoutes();
 }
 
 

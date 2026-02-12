@@ -2,7 +2,6 @@ package logisticsapp.commands.creation;
 
 import logisticsapp.commands.CommandsConstants;
 import logisticsapp.commands.contracts.Command;
-import logisticsapp.core.LogisticsRepositoryImpl;
 import logisticsapp.core.contracts.LogisticsRepository;
 import logisticsapp.models.Customer;
 import logisticsapp.utils.ValidationHelpers;

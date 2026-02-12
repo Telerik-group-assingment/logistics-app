@@ -1,11 +1,9 @@
 package logisticsapp.commands.assign;
 
 import logisticsapp.commands.contracts.Command;
-import logisticsapp.core.LogisticsRepositoryImpl;
 import logisticsapp.core.contracts.LogisticsRepository;
 import logisticsapp.models.DeliveryRouteImpl;
 import logisticsapp.models.TruckImpl;
-import logisticsapp.models.contracts.Truck;
 import logisticsapp.utils.ValidationHelpers;
 
 import java.util.List;

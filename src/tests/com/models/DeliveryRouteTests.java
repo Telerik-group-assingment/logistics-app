@@ -1,9 +1,7 @@
 package com.models;
 
-import logisticsapp.models.DeliveryPackageImpl;
 import logisticsapp.models.DeliveryRouteImpl;
 import logisticsapp.models.Location;
-import logisticsapp.models.enums.State;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,10 +1,8 @@
 package com.models;
 
-import logisticsapp.commands.creation.CreateCustomerCommand;
 import logisticsapp.exceptions.InvalidInput;
 import logisticsapp.models.Customer;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

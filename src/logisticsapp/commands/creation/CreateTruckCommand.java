@@ -2,8 +2,6 @@ package logisticsapp.commands.creation;
 
 import logisticsapp.commands.CommandsConstants;
 import logisticsapp.commands.contracts.Command;
-import logisticsapp.commands.enums.CommandType;
-import logisticsapp.core.LogisticsRepositoryImpl;
 import logisticsapp.core.contracts.LogisticsRepository;
 import logisticsapp.models.TruckImpl;
 import logisticsapp.models.enums.TruckBrand;

@@ -9,6 +9,9 @@ public enum CommandType {
     ASSIGNPACKAGE,
     ASSIGNTRUCK,
     SEARCHROUTE,
+    STARTROUTE,
+    HELP,
+    SHOWROUTES
 
 
 }

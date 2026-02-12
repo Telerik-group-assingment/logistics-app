@@ -1,7 +1,6 @@
 package logisticsapp.models;
 
 import logisticsapp.exceptions.IllegalOperation;
-import logisticsapp.models.contracts.DeliveryPackage;
 import logisticsapp.models.contracts.Truck;
 import logisticsapp.models.enums.TruckBrand;
 import logisticsapp.utils.ValidationHelpers;

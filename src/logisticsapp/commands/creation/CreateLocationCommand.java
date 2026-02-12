@@ -2,7 +2,6 @@ package logisticsapp.commands.creation;
 
 import logisticsapp.commands.contracts.Command;
 import logisticsapp.commands.enums.Cities;
-import logisticsapp.core.LogisticsRepositoryImpl;
 import logisticsapp.core.contracts.LogisticsRepository;
 import logisticsapp.models.Location;
 import logisticsapp.utils.ParsingHelpers;

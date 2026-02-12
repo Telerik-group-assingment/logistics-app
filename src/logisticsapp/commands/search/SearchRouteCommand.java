@@ -1,12 +1,9 @@
 package logisticsapp.commands.search;
 
 import logisticsapp.commands.contracts.Command;
-import logisticsapp.core.LogisticsRepositoryImpl;
 import logisticsapp.core.contracts.LogisticsRepository;
-import logisticsapp.models.DeliveryPackageImpl;
 import logisticsapp.models.DeliveryRouteImpl;
 import logisticsapp.models.Location;
-import logisticsapp.utils.ParsingHelpers;
 import logisticsapp.utils.ValidationHelpers;
 
 import java.util.List;

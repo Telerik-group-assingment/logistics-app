@@ -4,10 +4,8 @@ import logisticsapp.core.contracts.LogisticsRepository;
 import logisticsapp.exceptions.IllegalOperation;
 import logisticsapp.exceptions.InvalidInput;
 import logisticsapp.models.*;
-import logisticsapp.models.enums.State;
 import logisticsapp.models.enums.TruckBrand;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class LogisticsRepositoryImpl implements LogisticsRepository {
@@ -96,9 +94,9 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
     }
 
     @Override
-    public DeliveryPackageImpl createDeliveryPackage(double weight, State state) {
+    public DeliveryPackageImpl createDeliveryPackage(double weight) {
 
-        DeliveryPackageImpl deliveryPackage = new DeliveryPackageImpl(++nextDeliveryPackageId, weight, state);
+        DeliveryPackageImpl deliveryPackage = new DeliveryPackageImpl(++nextDeliveryPackageId, weight);
 
         this.packages.add(deliveryPackage);
 

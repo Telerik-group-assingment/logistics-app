@@ -14,10 +14,10 @@ public class DeliveryPackageImpl implements DeliveryPackage {
     // Locations to be implemented
     private State state;
 
-    public DeliveryPackageImpl(int id, double weight,State state) {
+    public DeliveryPackageImpl(int id, double weight) {
         setId(id);
         setWeight(weight);
-        this.state = state;
+        this.state = State.NOT_ASSIGNED;
     }
 
     private void setId(int id) {

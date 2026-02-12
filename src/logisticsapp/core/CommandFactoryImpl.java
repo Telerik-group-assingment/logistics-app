@@ -5,7 +5,10 @@ import logisticsapp.commands.assign.AssignTruckCommand;
 import logisticsapp.commands.contracts.Command;
 import logisticsapp.commands.creation.*;
 import logisticsapp.commands.enums.CommandType;
+import logisticsapp.commands.help.HelpCommand;
 import logisticsapp.commands.search.SearchRouteCommand;
+import logisticsapp.commands.show.ShowRoutesCommand;
+import logisticsapp.commands.start.StartDeliveryRouteCommand;
 import logisticsapp.core.contracts.CommandFactory;
 import logisticsapp.core.contracts.LogisticsRepository;
 import logisticsapp.utils.ParsingHelpers;
@@ -42,6 +45,12 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new AssignTruckCommand(logisticsRepository);
             case SEARCHROUTE:
                 return new SearchRouteCommand(logisticsRepository);
+            case STARTROUTE:
+                return new StartDeliveryRouteCommand(logisticsRepository);
+            case HELP:
+                return new HelpCommand();
+            case SHOWROUTES:
+                return new ShowRoutesCommand(logisticsRepository);
             default:
                 throw new IllegalArgumentException(INVALID_COMMAND);
 

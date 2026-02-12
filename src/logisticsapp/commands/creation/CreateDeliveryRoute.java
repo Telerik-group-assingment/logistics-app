@@ -6,7 +6,6 @@ import logisticsapp.core.contracts.LogisticsRepository;
 import logisticsapp.exceptions.InvalidInput;
 import logisticsapp.models.DeliveryRouteImpl;
 import logisticsapp.models.Location;
-import logisticsapp.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;

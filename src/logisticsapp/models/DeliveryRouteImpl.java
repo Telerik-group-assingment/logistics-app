@@ -3,8 +3,6 @@ package logisticsapp.models;
 import logisticsapp.exceptions.IllegalOperation;
 import logisticsapp.exceptions.InvalidInput;
 import logisticsapp.models.contracts.DeliveryRoute;
-import logisticsapp.models.contracts.Truck;
-import logisticsapp.utils.ValidationHelpers;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -86,8 +84,10 @@ public class DeliveryRouteImpl implements DeliveryRoute {
     @Override
     public String print() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Route ").append(id).append(" | Truck: ")
-                .append(truck != null ? truck.getID() : "none")
+        sb.append("Route ").append(id).append(" From ").append(this.startLocation.getCity()).append(" To ")
+                .append(this.endLocation.getCity())
+                .append(" | Truck: ").append(truck != null ? truck.getID() : "none")
+                .append(this.truck.getTruckBrand()).append(" ").append(this.truck.getCapacity())
                 .append("\nPackages: ");
 
         if (truck != null && !truck.getDeliveryPackages().isEmpty()) {

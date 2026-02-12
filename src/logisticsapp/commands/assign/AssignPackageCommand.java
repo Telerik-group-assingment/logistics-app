@@ -1,7 +1,6 @@
 package logisticsapp.commands.assign;
 
 import logisticsapp.commands.contracts.Command;
-import logisticsapp.core.LogisticsRepositoryImpl;
 import logisticsapp.core.contracts.LogisticsRepository;
 import logisticsapp.models.DeliveryPackageImpl;
 import logisticsapp.models.TruckImpl;
