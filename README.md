@@ -14,8 +14,6 @@ Key Features :
 
 Create delivery routes with multiple locations
 
-Automatically calculate estimated arrival times for each stop based on a predefined average speed (87 km/h)
-
 Assign a truck to a delivery route
 
 Start a delivery route and calculate delivery schedules
@@ -25,10 +23,6 @@ Start a delivery route and calculate delivery schedules
 Create delivery packages with specific weight and state
 
 Assign packages to trucks and delivery routes
-
-Support bulk assignment of packages to a route
-
-Track packages by their unique ID
 
 🚛 Truck Management
 
