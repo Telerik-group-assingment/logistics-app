@@ -3,7 +3,7 @@ package logisticsapp.commands.creation;
 import logisticsapp.commands.CommandsConstants;
 import logisticsapp.commands.contracts.Command;
 import logisticsapp.core.contracts.LogisticsRepository;
-import logisticsapp.models.Customer;
+import logisticsapp.models.CustomerImpl;
 import logisticsapp.utils.ValidationHelpers;
 
 import java.util.List;
@@ -25,9 +25,9 @@ public class CreateCustomerCommand implements Command {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
 
-        Customer createdCustomer = repository.createCustomer(parameters.get(0),parameters.get(1),parameters.get(2));
+        CustomerImpl createdCustomer = repository.createCustomer(parameters.get(0),parameters.get(1),parameters.get(2));
 
 
-        return String.format(CommandsConstants.CUSTOMER_CREATED_MESSAGE,createdCustomer.getId());
+        return String.format(CommandsConstants.CUSTOMER_CREATED_MESSAGE,createdCustomer.getID());
     }
 }

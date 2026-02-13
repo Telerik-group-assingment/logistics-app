@@ -10,14 +10,14 @@ public interface LogisticsRepository {
 
     TruckImpl  findTruckById(int id);
 
-    Customer findCustomerById(int id);
+    CustomerImpl findCustomerById(int id);
 
     List<TruckImpl> getTrucks();
 
     List<Location> getLocations();
 
 
-    Customer createCustomer(String firstName,String secondName,String PhoneNum);
+    CustomerImpl createCustomer(String firstName, String secondName, String PhoneNum);
 
     DeliveryRouteImpl createDeliveryRoute(List<Location> locations);
 
@@ -37,6 +37,9 @@ public interface LogisticsRepository {
     List<DeliveryRouteImpl> searchRoutes(Location startLocation, Location endLocation);
 
     List<DeliveryRouteImpl> getDeliveryRoutes();
+
+    List<DeliveryPackageImpl> getUnassignedPackages();
+
 }
 
 

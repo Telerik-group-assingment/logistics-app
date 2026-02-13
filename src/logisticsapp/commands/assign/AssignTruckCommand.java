@@ -31,7 +31,7 @@ public class AssignTruckCommand implements Command {
         route.assignTruck(truck);
 
         return String.format(
-                "Truck %d successfully assigned to route %d",
+                "Truck with ID %d successfully assigned to route with ID %d",
                 truckId, routeId);
     }
 }

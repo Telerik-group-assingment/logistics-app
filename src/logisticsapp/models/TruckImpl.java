@@ -66,6 +66,7 @@ public class TruckImpl implements Truck {
 
         deliveryPackages.add(deliveryPackage);
         capacity -= deliveryPackage.getWeight();
+        deliveryPackage.setAssigned();
     }
 
     public boolean isAssigned() {
@@ -90,8 +91,8 @@ public class TruckImpl implements Truck {
     @Override
     public String print() {
         return String.format("Truck info:%n" +
-                        "Capacity: %d",
-                "Max range: %d",
-                "Truck brand: %s", getCapacity(), getMaxRange(), getTruckBrand());
+                        "Capacity: %.2f" +
+                        "Max range: %d" +
+                        "Truck brand: %s", getCapacity(), getMaxRange(), getTruckBrand());
     }
 }

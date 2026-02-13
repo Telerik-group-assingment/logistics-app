@@ -32,14 +32,20 @@ public class HelpCommand implements Command {
                 ASSIGNPACKAGE <packageId> <truckId>
                   - Assigns a package to a truck
                 
+                ASSIGNCUSTOMERTOPACKAGE <customerId> <packageId>
+                  - Assign a customer to a package
+                
                 STARTROUTE <routeId>
                   - Starts the route and calculates arrival times
                 
                 SEARCHROUTE <startCity> <endCity>
                   - Searches routes by start and end locations
-                  
+                
                 SHOWROUTES
                 - Calls the print methods to every existing route
+                
+                SHOWUNASSIGNEDPACKAGES
+                - Shows all packages that are not assigned to a route yet.
                 
                 HELP
                   - Shows all available commands

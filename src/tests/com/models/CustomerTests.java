@@ -1,18 +1,18 @@
 package com.models;
 
 import logisticsapp.exceptions.InvalidInput;
-import logisticsapp.models.Customer;
+import logisticsapp.models.CustomerImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CustomerTests {
 
-    Customer customer;
+    CustomerImpl customer;
 
     @BeforeEach
     public void init() {
-        customer = new Customer(1, "tomi", "babunski", "1234567899");
+        customer = new CustomerImpl(1, "tomi", "babunski", "1234567899");
     }
 
 
@@ -38,19 +38,19 @@ public class CustomerTests {
 
     @Test
     public void customer_shouldThrowException_WhenFirstNameIsNotCorrect() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Customer(1, "s", "jogurt",
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new CustomerImpl(1, "s", "jogurt",
                 "1234567899"));
     }
 
     @Test
     public void customer_shouldThrowException_WhenLastNameIsNotCorrect() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Customer(1, "sandi", "p",
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new CustomerImpl(1, "sandi", "p",
                 "1234567899"));
     }
 
     @Test
     public void customer_shouldThrowException_WhenPhoneNumIsNotCorrect() {
-        Assertions.assertThrows(InvalidInput.class, () -> new Customer(1, "sponge", "bobbbbbb",
+        Assertions.assertThrows(InvalidInput.class, () -> new CustomerImpl(1, "sponge", "bobbbbbb",
                 "123456789"));
     }
 

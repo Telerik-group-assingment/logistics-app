@@ -1,5 +1,6 @@
 package logisticsapp.core;
 
+import logisticsapp.commands.assign.AssignCustomerToPackageCommand;
 import logisticsapp.commands.assign.AssignPackageCommand;
 import logisticsapp.commands.assign.AssignTruckCommand;
 import logisticsapp.commands.contracts.Command;
@@ -8,6 +9,7 @@ import logisticsapp.commands.enums.CommandType;
 import logisticsapp.commands.help.HelpCommand;
 import logisticsapp.commands.search.SearchRouteCommand;
 import logisticsapp.commands.show.ShowRoutesCommand;
+import logisticsapp.commands.show.ShowUnassignedPackages;
 import logisticsapp.commands.start.StartDeliveryRouteCommand;
 import logisticsapp.core.contracts.CommandFactory;
 import logisticsapp.core.contracts.LogisticsRepository;
@@ -43,6 +45,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new AssignPackageCommand(logisticsRepository);
             case ASSIGNTRUCK:
                 return new AssignTruckCommand(logisticsRepository);
+            case ASSIGNCUSTOMERTOPACKAGE:
+                return new AssignCustomerToPackageCommand(logisticsRepository);
             case SEARCHROUTE:
                 return new SearchRouteCommand(logisticsRepository);
             case STARTROUTE:
@@ -51,6 +55,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new HelpCommand();
             case SHOWROUTES:
                 return new ShowRoutesCommand(logisticsRepository);
+            case SHOWUNASSIGNEDPACKAGES:
+                return new ShowUnassignedPackages(logisticsRepository);
             default:
                 throw new IllegalArgumentException(INVALID_COMMAND);
 

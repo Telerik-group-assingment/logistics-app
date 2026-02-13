@@ -1,13 +1,14 @@
 package logisticsapp.models;
 
 import logisticsapp.exceptions.InvalidInput;
+import logisticsapp.models.contracts.Customer;
 import logisticsapp.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Customer {
+public class CustomerImpl implements Customer {
 
     private static final String INVALID_NAME_ERROR_MESSAGE = "%s name must be between %d and %d characters.";
 
@@ -22,7 +23,7 @@ public class Customer {
     private String phoneNum;
 
 
-    public Customer(int id, String firstName, String lastName, String phoneNum) {
+    public CustomerImpl(int id, String firstName, String lastName, String phoneNum) {
         setId(id);
         setFirstName(firstName);
         setLastName(lastName);
@@ -34,7 +35,8 @@ public class Customer {
         return Collections.unmodifiableList(packageIds);
     }
 
-    public int getId() {
+    @Override
+    public int getID() {
         return id;
     }
 
@@ -74,4 +76,11 @@ public class Customer {
     }
 
 
+    @Override
+    public String print() {
+        return String.format("Customer details:%n" +
+                            "First name: %s%n" +
+                            "Last name: %s%n" +
+                            "Phone number: %s", getFirstName(), getLastName(), getPhoneNum());
+    }
 }

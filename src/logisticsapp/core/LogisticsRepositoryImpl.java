@@ -4,9 +4,12 @@ import logisticsapp.core.contracts.LogisticsRepository;
 import logisticsapp.exceptions.IllegalOperation;
 import logisticsapp.exceptions.InvalidInput;
 import logisticsapp.models.*;
+import logisticsapp.models.contracts.DeliveryPackage;
+import logisticsapp.models.enums.State;
 import logisticsapp.models.enums.TruckBrand;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LogisticsRepositoryImpl implements LogisticsRepository {
 
@@ -16,7 +19,7 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
     private int nextDeliveryPackageId;
 
 
-    private final List<Customer> customers = new ArrayList<>();
+    private final List<CustomerImpl> customers = new ArrayList<>();
     private final List<TruckImpl> trucks = new ArrayList<>();
     private final List<DeliveryRouteImpl> deliveryRoutes = new ArrayList<>();
     private final List<Location> locations = new ArrayList<>();
@@ -42,18 +45,18 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
     }
 
     @Override
-    public Customer findCustomerById(int id) {
-        return this.customers.stream().filter(c -> c.getId() == id).findFirst().orElseThrow();
+    public CustomerImpl findCustomerById(int id) {
+        return this.customers.stream().filter(c -> c.getID() == id).findFirst().orElseThrow();
     }
 
     @Override
-    public Customer createCustomer(String firstName, String secondName, String phoneNum) {
+    public CustomerImpl createCustomer(String firstName, String secondName, String phoneNum) {
 
         if (this.customers.stream().anyMatch(c -> c.getPhoneNum().equals(phoneNum))) {
-            throw new InvalidInput("Customer with that phoneNumber already exists! ");
+            throw new InvalidInput("CustomerImpl with that phoneNumber already exists! ");
         }
 
-        Customer customer = new Customer(++nextCustomerId, firstName, secondName, phoneNum);
+        CustomerImpl customer = new CustomerImpl(++nextCustomerId, firstName, secondName, phoneNum);
         this.customers.add(customer);
         return customer;
     }
@@ -103,6 +106,12 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
         return deliveryPackage;
     }
 
+    @Override
+    public List<DeliveryPackageImpl> getUnassignedPackages() {
+       return packages.stream().filter(p -> p.getState() == State.NOT_ASSIGNED).toList();
+    }
+
+
 
     public List<DeliveryRouteImpl> searchRoutes(Location startLocation, Location endLocation) {
 
@@ -129,7 +138,7 @@ public class LogisticsRepositoryImpl implements LogisticsRepository {
                 .stream()
                 .anyMatch(l -> l.getCity().equals(city));
 
-        if(exists){
+        if (exists) {
             throw new IllegalOperation("You are trying to create a location that already exists");
         }
 

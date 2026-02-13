@@ -1,5 +1,6 @@
 package logisticsapp.models;
 
+import logisticsapp.models.contracts.Customer;
 import logisticsapp.models.contracts.DeliveryPackage;
 import logisticsapp.models.enums.State;
 import logisticsapp.utils.ValidationHelpers;
@@ -10,8 +11,7 @@ public class DeliveryPackageImpl implements DeliveryPackage {
 
     private int id;
     private double weight;
-//    private Customer customer;
-    // Locations to be implemented
+    private Customer customer;
     private State state;
 
     public DeliveryPackageImpl(int id, double weight) {
@@ -33,15 +33,18 @@ public class DeliveryPackageImpl implements DeliveryPackage {
         this.weight = weight;
     }
 
-
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public State getState() {
         return this.state;
     }
 
-    private void setState(State state) {
-        this.state = state;
+    protected void setAssigned() {
+        this.state = State.ASSIGNED;
     }
+
 
     @Override
     public int getID() {
@@ -50,9 +53,10 @@ public class DeliveryPackageImpl implements DeliveryPackage {
 
     @Override
     public String print() {
-        return String.format("Delivery package%n" +
-                            "Weight: %.2f%n",
-                            "State: %s",
-                            "Contact information: %s", getWeight(), getState(), getClass());
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Delivery package:").append("ID: ").append(getID()).append("\n").append("Weight: ").append(getWeight()).append("\n")
+                .append("State: ").append(getState())
+                .append("\n").append(this.customer != null ? this.customer.print() : "No customer information found.");
+        return stringBuilder.toString();
     }
 }
