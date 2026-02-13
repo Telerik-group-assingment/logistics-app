@@ -37,11 +37,15 @@ public class DeliveryPackageImpl implements DeliveryPackage {
         this.customer = customer;
     }
 
+    public Customer getCustomer() {
+        return this.customer;
+    }
+
     public State getState() {
         return this.state;
     }
 
-    protected void setAssigned() {
+    public void setAssigned() {
         this.state = State.ASSIGNED;
     }
 
