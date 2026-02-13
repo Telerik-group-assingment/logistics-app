@@ -30,7 +30,7 @@ public class TruckTests {
     }
 
     @Test
-    public void assignPackeToTruck_shouldWorkCorrectly() {
+    public void assignPackageToTruck_shouldWorkCorrectly() {
         TruckImpl truck = new TruckImpl(1, 200, 500, TruckBrand.SCANIA);
         DeliveryPackageImpl deliveryPackage = new DeliveryPackageImpl(1,30);
 

@@ -33,6 +33,10 @@ public class DeliveryRouteTests {
         Assertions.assertEquals(2,deliveryRoute.getLocations().size());
     }
 
+    @Test
+    public void start_RouteShould_Set_Expected_Arrival_time() {
+
+    }
 
 
 

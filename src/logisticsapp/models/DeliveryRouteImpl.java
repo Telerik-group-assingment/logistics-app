@@ -1,5 +1,6 @@
 package logisticsapp.models;
 
+import com.sun.source.tree.LiteralTree;
 import logisticsapp.exceptions.IllegalOperation;
 import logisticsapp.exceptions.InvalidInput;
 import logisticsapp.models.contracts.DeliveryRoute;
@@ -7,6 +8,7 @@ import logisticsapp.models.contracts.DeliveryRoute;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class DeliveryRouteImpl implements DeliveryRoute {
 
@@ -18,8 +20,6 @@ public class DeliveryRouteImpl implements DeliveryRoute {
     private Location endLocation;
     private LocalDateTime departureTime;
     private TruckImpl truck;
-
-    //locations to be implemented
 
     public DeliveryRouteImpl(int id, List<Location> locations) {
         setId(id);
@@ -48,7 +48,7 @@ public class DeliveryRouteImpl implements DeliveryRoute {
     }
 
     public void setLocations(List<Location> deliveryLocations) {
-        if(deliveryLocations.size() < 2){
+        if (deliveryLocations.size() < 2) {
             throw new InvalidInput(INVALID_LOCATIONS_COUNT_MESSAGE);
         }
 
@@ -86,8 +86,8 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         StringBuilder sb = new StringBuilder();
         sb.append("Route ").append(id).append(" From ").append(this.startLocation.getCity()).append(" To ")
                 .append(this.endLocation.getCity())
-                .append(" | Truck: ").append(truck != null ? truck.getID() : "none")
-                .append(this.truck.getTruckBrand()).append(" ").append(this.truck.getCapacity())
+                .append(" | Truck: ").append(truck != null ? truck.getID() : "No ").append(" ")
+                .append(truck != null ? this.truck.getTruckBrand() : "truck").append(" ").append(truck != null ? this.truck.getCapacity() : "assigned")
                 .append("\nPackages: ");
 
         if (truck != null && !truck.getDeliveryPackages().isEmpty()) {
@@ -96,8 +96,29 @@ public class DeliveryRouteImpl implements DeliveryRoute {
             }
         } else {
             sb.append("none");
+            sb.append("\n");
         }
 
-        return sb.toString().trim();
+        if (startLocation.getExpectedArrivalTime() != null && endLocation.getExpectedArrivalTime() != null) {
+            sb.append("\n").append("Schedule: ").append("\n");
+            StringJoiner joiner = new StringJoiner(" -> ");
+            for (Location location : locations) {
+                if (location.getExpectedArrivalTime() != null) {
+                    joiner.add(location.getCity() + " " + location.getFormattedExpectedArrivalTime());
+                } else {
+                    sb.append("TBD");
+                }
+
+                sb.append(joiner);
+                sb.append("\n");
+            }
+        }
+
+        else {
+                sb.append("Route has not been started.");
+            }
+
+            return sb.toString().trim();
+
     }
 }
