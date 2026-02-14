@@ -81,6 +81,10 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         return endLocation;
     }
 
+    public TruckImpl getTruck() {
+        return this.truck;
+    }
+
     @Override
     public String print() {
         StringBuilder sb = new StringBuilder();
